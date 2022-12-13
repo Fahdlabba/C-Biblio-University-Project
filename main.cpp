@@ -250,7 +250,7 @@ void louer(biblio t[100],fiche f[100],int n,int k){
 	SYSTEMTIME time;
 	GetSystemTime(&time);
 	do{
-		printf("Donner Le code de document que vous vouler louer : ");
+		printf("Donner Le code de document que vous vouler louer : \n ");
 	scanf("%d",&code);
 	}while(verif_code(t,code,n));
 	do{
@@ -260,7 +260,7 @@ void louer(biblio t[100],fiche f[100],int n,int k){
 	int i=search(t,code,n);
 	int j=search_id(f,id,k);
 	if(t[i].dispo==0 && t[i].nbre==0){
-		printf("Ces document sont deja louer ! ");
+		printf("Ces document sont deja louer !\n ");
 	}else{
 		t[i].nbre--;
 		if(t[i].nbre==0){
@@ -277,6 +277,7 @@ void louer(biblio t[100],fiche f[100],int n,int k){
 			verif_date(f,i,10);
 			affiche_data(t[i].livre.titre_liv,t[i].magazine.titre_mag,f[i].date_retour.j,f[i].date_retour.m,f[i].date_retour.y,t[i].type);
 		}
+		printf("Louer avec succes ! \n");
 
 	}
 
@@ -287,7 +288,7 @@ void retour(biblio t[100],fiche f[100],int n,int k){
 	SYSTEMTIME time;
 	GetSystemTime(&time);
 	do{
-		printf("Donner Le code de document que vous avez deja louer : ");
+		printf("Donner Le code de document que vous avez deja louer : \n");
 	scanf("%d",&code);
 	}while(verif_code(t,code,n));
 	do{
@@ -296,9 +297,8 @@ void retour(biblio t[100],fiche f[100],int n,int k){
 	}while(verif(f,id,n));
 	int i=search_id(f,i,k);
 	int j=search(t,code,n);
-	if(t[j].dispo==1){
-		printf("Verifier Votre donnees ! ce livre n'est pas louer ");
-		
+	if(t[j].dispo==1 && f[i].nbr_doc==0){
+		printf("Verifier Votre donnees ! Vous n'avez pas loue cette  livre\n ");
 	}else{
 	
 	if((f[i].date_retour.j>time.wDay) && (f[i].date_retour.m>time.wMonth)){
@@ -308,6 +308,7 @@ void retour(biblio t[100],fiche f[100],int n,int k){
 	int j=search(t,code,n);
 	t[i].dispo=1;
 	t[i].nbre++;
+	printf("Retour Avec Succes !\n");
 }
 }
 void aff_mis(){
