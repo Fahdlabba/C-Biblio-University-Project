@@ -262,8 +262,10 @@ void louer(biblio t[100],fiche f[100],int n,int k){
 	if(t[i].dispo==0 && t[i].nbre==0){
 		printf("Ces document sont deja louer ! ");
 	}else{
-		t[i].dispo=0;
 		t[i].nbre--;
+		if(t[i].nbre==0){
+			t[i].dispo=0;
+		}
 		f[i].nbr_doc++;
 		f[i].date_louer.j=time.wDay;
 		f[i].date_louer.m=time.wMonth;
@@ -429,7 +431,7 @@ void affichage_cont(biblio t[100],int n){
 		}else if(strcmp(t[i].type,"magazine ")==0){
 			printf("Titre De Magazine : %s , Quantite  %d , Autheur : %s , Etat : ",t[i].magazine.titre_mag,t[i].nbre,t[i].magazine.name_auth);
 		}
-		if(t[i].dispo==0){
+		if(t[i].dispo==0 && t[i].nbre!=0){
 			printf(" N'est pas diponible pour le moument !\n");
 		}else{
 			printf(" Diponible!\n");
