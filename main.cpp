@@ -352,15 +352,22 @@ void mise_jour(biblio t[100],int *n,fiche f[100],int k){
 				break;
 			case 2 :
 				int q,code;
-				printf("Donner La quantite que vous voulez l'ajouter et le code de cette document : ");
-				scanf("%d %d",&q,&code);
+				printf("Donner La quantite que vous voulez l'ajouter :");
+				scanf("%d",&q);
+				do{
+					printf("Donner code de Document  : ");
+					scanf("%d",&code);
+				}while(verif_code(t,code,*n));
 				i=search(t,code,*n);
 				t[i].nbre+=q;
 				break;
 			case 3 :
 				code;
-				printf("Donner code de Document que vous voulez modifier sa disponibilite : ");
-				scanf("%d",&code);
+				do{
+				    printf("Donner code de Document que vous voulez modifier sa disponibilite : ");
+				    scanf("%d",&code);	
+				}while(verif_code(t,code,*n));
+				
 				i=search(t,code,*n);
 				if(t[i].dispo==0){
 					t[i].dispo=1;
@@ -370,8 +377,10 @@ void mise_jour(biblio t[100],int *n,fiche f[100],int k){
 				break;
 			case 4:
 				code;
-				printf("Donner code de Document pour le supprimer : ");
-				scanf("%d",&code);
+				do{
+					printf("Donner code de Document pour le supprimer : ");
+					scanf("%d",&code);
+				}while(verif_code(t,code,*n));
 				i=search(t,code,*n);
 				supp(t,*n,i);
 				*n=*n-1;
